@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React from 'react'
+import {connect} from 'react-redux';
+import { incplayeroneown,incplayerone,decplayerone, incplayertwo,decplayertwo } from './Actions';
+const App = ({playerone,playertwo,incplayeroneown,incplayerone,decplayerone,incplayertwo,decplayertwo}) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <center>
+        <h3>PlayerOne Details</h3>
+        <p>Name : {playerone.name} | {' '} Score : {playerone.score}</p><br/>
+        <button onClick={()=>incplayeroneown(5)}>Increment</button>
+        <button onClick={()=>decplayerone()}>Decrement</button>
+         <hr/>
+        <h3>PlayerTwo Details</h3>
+        <p>Name : {playertwo.name} | {' '} Score : {playertwo.score}</p><br/>
+        <button onClick={()=>incplayertwo()}>Increment</button>
+        <button onClick={()=>decplayertwo()}>Decrement</button>
+      </center>
     </div>
-  );
+  )
 }
 
-export default App;
+const mapStateToProps = state =>({
+  playerone : state.playerone,
+  playertwo : state.playertwo
+})
+export default connect(mapStateToProps,{incplayeroneown,incplayerone,decplayerone,incplayertwo,decplayertwo})(App);
